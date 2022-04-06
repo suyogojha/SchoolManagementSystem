@@ -1,0 +1,26 @@
+﻿@model SchoolManagementSystemP1.Models.ProvinceVM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+      <div class="form-group">
+        @*<label class="col-md-2">Provice Name</label>*@
+          @Html.LabelFor(m=>m.ProvinceName,new { @class="col-md-2"})
+          @Html.TextBoxFor(m=>m.ProvinceName,new { id = "ProvinceName" ,@class="form-control col-md-4" ,@placeholder="Enter Province Name" })
+        @*<input type="text" name="ProvinceName" id="ProvinceName" class="form-control col-md-4" placeholder="Enter Province Name">*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status, new { @class = "col-md-2" })
+        @Html.RadioButtonFor(m => m.Status, "True", new { @Id = "Status" }) True
+        @Html.RadioButtonFor(m => m.Status, "False", new { @Id = "Status" }) False
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+}
+

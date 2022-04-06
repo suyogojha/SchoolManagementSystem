@@ -1,0 +1,29 @@
+﻿@model SchoolManagementSystemP1.Models.DistrictVM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <label class="col-md-2">Province</label>
+        @Html.DropDownListFor(model => model.ProvinceId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetProvinceList(),"Select Province",new { @class="form-control",@id="ProvinceId"})
+    </div>
+    <div class="form-group">
+        <label class="col-md-2">District Name</label>
+        @Html.TextBoxFor(model=>model.DistrictName, null, new { @class = "form-control", id = "DistrictName" })
+    </div>
+    <div class="form-group">
+        @Html.CheckBoxFor(m => m.Status) True
+        @Html.CheckBoxFor(m => m.Status) False
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+

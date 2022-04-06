@@ -1,0 +1,14 @@
+﻿@model List<SchoolManagementSystemP1.adonetdatamodel.StudentInfo>
+@{
+    ViewBag.Title = "StudentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@foreach (var item in Model)
+{
+    <p>@item.FirstName</p>
+    <p>@item.LastName</p>
+    <p>@item.Phone</p>
+    <p>@item.Email</p>
+}
+
+

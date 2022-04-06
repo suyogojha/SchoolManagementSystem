@@ -1,0 +1,169 @@
+﻿@model SchoolManagementSystemP1.adonetdatamodel.StudentInfo
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>StudentInfo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MiddleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PProviceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PProviceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PDistrictId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PDistrictId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PMunicipalityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PMunicipalityId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PWardNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PWardNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CProvinceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CProvinceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CDistrictId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CDistrictId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CMunicipalityID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CMunicipalityID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CWard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CWard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

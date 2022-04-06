@@ -1,0 +1,48 @@
+﻿@model SchoolManagementSystemP1.adonetdatamodel.CourseDetail
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Course Create
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        <div class="form-group">
+                            <label>Course Name</label>
+                            @Html.TextBoxFor(x => x.CourseName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Credit Hours</label>
+                            @Html.TextBoxFor(x => x.CreditHours, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Status)
+                            @Html.RadioButtonFor(m => m.Status, "True", new { @Id = "Status" }) True
+                            @Html.RadioButtonFor(m => m.Status, "False", new { @Id = "Status" }) False
+                        </div>  
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Submit" class="btn btn-default" />
+                            </div>
+                        </div>
+                    }
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

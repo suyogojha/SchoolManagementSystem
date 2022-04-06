@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b10f82456f4439d9037c8451205f07f" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="SMSP1Model.CourseDetail" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SMSP1Model.District" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="SMSP1Model.EducationInfo" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="SMSP1Model.Muncipality" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="SMSP1Model.ParentDetail" Width="1.5" PointX="8.25" PointY="6.625" />
+        <EntityTypeShape EntityType="SMSP1Model.ParentRelationship" Width="1.5" PointX="6" PointY="12" />
+        <EntityTypeShape EntityType="SMSP1Model.Province" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="SMSP1Model.StudentInfo" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="SMSP1Model.StudentLevel" Width="1.5" PointX="3" PointY="12" />
+        <AssociationConnector Association="SMSP1Model.FK_District_Province" />
+        <AssociationConnector Association="SMSP1Model.FK_Muncipality_District" />
+        <AssociationConnector Association="SMSP1Model.FK_EducationInfo_StudentInfo" />
+        <AssociationConnector Association="SMSP1Model.FK_EducationInfo_StudentLevel" />
+        <AssociationConnector Association="SMSP1Model.FK_Muncipality_Province" />
+        <AssociationConnector Association="SMSP1Model.FK_ParentDetails_ParentRelationship" />
+        <AssociationConnector Association="SMSP1Model.FK_ParentDetails_StudentInfo" />
+        <AssociationConnector Association="SMSP1Model.FK_StudentInfo_Province" />
+        <AssociationConnector Association="SMSP1Model.FK_StudentInfo_Province1" />
+        <AssociationConnector Association="SMSP1Model.FK_StudentInfo_District" />
+        <AssociationConnector Association="SMSP1Model.FK_StudentInfo_District1" />
+        <AssociationConnector Association="SMSP1Model.FK_StudentInfo_Muncipality" />
+        <AssociationConnector Association="SMSP1Model.FK_StudentInfo_Muncipality1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

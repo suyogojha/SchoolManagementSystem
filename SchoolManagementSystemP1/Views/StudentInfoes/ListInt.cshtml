@@ -1,0 +1,27 @@
+﻿@model List<int>
+@{
+    ViewBag.Title = "ListInt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <p>@item</p>
+}
+
+
+
+
+@*using viewdata*@
+@*@foreach (var item in (List<int>)ViewData["intlist"])
+{
+    <p>@item</p>
+}*@
+@*using viewbag*@
+@*@foreach (var item in ViewBag.intlist)
+{
+    <p>@item</p>
+}*@
+
+
+

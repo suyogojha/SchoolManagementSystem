@@ -1,0 +1,13 @@
+﻿@model List<SchoolManagementSystemP1.Models.ProvinceVM>
+@{
+    ViewBag.Title = "ListProvince";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@foreach (var item in Model)
+{
+    <p>province id = @item.ProvinceID</p>
+    <p>province Name = @item.ProvinceName</p>
+}
+
+
+

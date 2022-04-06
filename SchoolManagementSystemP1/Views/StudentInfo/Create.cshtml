@@ -1,0 +1,180 @@
+﻿@model SchoolManagementSystemP1.Models.StudentInfoVM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (ViewBag.Message != null)
+        {
+        <div class="alert alert-danger">
+           @ViewBag.Message
+        </div>
+        }
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Student Registration Form
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="form-group">
+                                <label class="col-md-2">First Name</label>
+                                @Html.TextBoxFor(model => model.FirstName, null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Middel Name</label>
+                                @Html.TextBoxFor(model => model.MiddleName, null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Last Name</label>
+                                @Html.TextBoxFor(model => model.LastName, null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Phone</label>
+                                @Html.TextBoxFor(model => model.Phone, null, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2">Email</label>
+                                @Html.TextBoxFor(model => model.Email, null, new { @class = "form-control" })
+                            </div>
+                            <div class="panel panel-default col-lg-6">
+                                <div class="panel-heading">
+                                    Permanent Address
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-md-2">Province</label>
+                                        @Html.DropDownListFor(model => model.PProviceId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetProvinceList(), "Select Province", new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2">District</label>
+                                        @Html.DropDownListFor(model => model.PDistrictId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetDistrictList(), "Select District", new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2">Municipality</label>
+                                        @Html.DropDownListFor(model => model.PMunicipalityId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetMunicipalityList(), "Select Municipality", new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2">Ward</label>
+                                        @Html.TextBoxFor(model => model.PWardNo, null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <!-- .panel-body -->
+                            </div>
+                            <div class="panel panel-default col-lg-6">
+                                <div class="panel-heading">
+                                    Temporary Address
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-md-2">Province</label>
+                                        @Html.DropDownListFor(model => model.CProvinceId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetProvinceList(), "Select Province", new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2">District</label>
+                                        @Html.DropDownListFor(model => model.CDistrictId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetDistrictList(), "Select Province", new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2">Municipality</label>
+                                        @Html.DropDownListFor(model => model.CMunicipalityID, SchoolManagementSystemP1.CommonUtilities.Utilities.GetMunicipalityList(), "Select Province", new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2">Ward</label>
+                                        @Html.TextBoxFor(model => model.CWard, null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <!-- .panel-body -->
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Parent Details
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    @if (Model.ParentList != null)
+                                    {
+                                        for (var i = 0; i < Model.ParentList.Count; i++)
+                                        {
+                                            <div class="form-group col-lg-4" ">
+                                                @Html.LabelFor(model => Model.ParentList[i].RelatioshipId)
+                                                @Html.DropDownListFor(model => Model.ParentList[i].RelatioshipId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetParentRelationshipList(), new { @class = "form-control" })
+                                            </div>
+                                            <div class="form-group col-lg-4">
+                                                @Html.LabelFor(model => Model.ParentList[i].ParentName)
+                                                @Html.TextBoxFor(model => Model.ParentList[i].ParentName, new { @class = "form-control" })
+                                            </div>
+                                            <div class="form-group col-lg-4" ">
+                                                @Html.LabelFor(model => Model.ParentList[i].ParentPhone)
+                                                @Html.TextBoxFor(model => Model.ParentList[i].ParentPhone, new { @class = "form-control" })
+                                            </div>
+                                    <!-- .panel-body -->
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Educational Information
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    @if (Model.EducationList != null)
+                                    {
+                                        for (int i = 0; i < Model.EducationList.Count; i++)
+                                        {
+
+
+                                            @Html.HiddenFor(x => x.Id)
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.EducationList[i].Level)
+                                                @Html.DropDownListFor(model => model.EducationList[i].LevelId, SchoolManagementSystemP1.CommonUtilities.Utilities.GetEducationLevelList(), new { @class = "form-control" })
+                                            </div>
+                                            <div class="form-group col-lg-3">
+                                                @Html.LabelFor(model => model.EducationList[i].College)
+                                                @Html.TextBoxFor(model => model.EducationList[i].College, new { @class = "form-control" })
+                                            </div>
+                                            <div class="form-group col-lg-3">
+                                                @Html.LabelFor(model => model.EducationList[i].University)
+                                                @Html.TextBoxFor(model => model.EducationList[i].University, new { @class = "form-control" })
+                                            </div>
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.EducationList[i].Grade)
+                                                @Html.TextBoxFor(model => model.EducationList[i].Grade, new { @class = "form-control" })
+                                            </div>
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.EducationList[i].PassedYear)
+                                                @Html.TextBoxFor(model => model.EducationList[i].PassedYear, new { @class = "form-control" })
+                                            </div>
+
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Submit" class="btn btn-default" />
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+

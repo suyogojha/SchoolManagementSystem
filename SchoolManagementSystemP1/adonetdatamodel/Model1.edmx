@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SMSP1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CourseDetails">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="150" />
+          <Property Name="CreditHours" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="EducationInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelId" Type="int" />
+          <Property Name="CollegeName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BoardName" Type="nvarchar" MaxLength="200" />
+          <Property Name="MajorSubject" Type="nvarchar" MaxLength="150" />
+          <Property Name="PassedYear" Type="nvarchar" MaxLength="150" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="StudentId" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="350" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="350" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Muncipality">
+          <Key>
+            <PropertyRef Name="MunicipalityId" />
+          </Key>
+          <Property Name="MunicipalityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MunicipalityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="DistrictId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="ParentDetails">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ParentPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Relationship" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
+        </EntityType>
+        <EntityType Name="ParentRelationship">
+          <Key>
+            <PropertyRef Name="RelationshipId" />
+          </Key>
+          <Property Name="RelationshipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RelationshipName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="ProvinceId" />
+          </Key>
+          <Property Name="ProvinceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProvinceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="StudentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="PProviceId" Type="int" />
+          <Property Name="PDistrictId" Type="int" />
+          <Property Name="PMunicipalityId" Type="int" />
+          <Property Name="PWardNo" Type="int" />
+          <Property Name="CProvinceId" Type="int" />
+          <Property Name="CDistrictId" Type="int" />
+          <Property Name="CMunicipalityID" Type="int" />
+          <Property Name="CWard" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="300" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="StudentLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_District_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationInfo_StudentInfo">
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="0..1" />
+          <End Role="EducationInfo" Type="Self.EducationInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EducationInfo">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationInfo_StudentLevel">
+          <End Role="StudentLevel" Type="Self.StudentLevel" Multiplicity="0..1" />
+          <End Role="EducationInfo" Type="Self.EducationInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EducationInfo">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muncipality_District">
+          <End Role="District" Type="Self.District" Multiplicity="1" />
+          <End Role="Muncipality" Type="Self.Muncipality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Muncipality">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muncipality_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="Muncipality" Type="Self.Muncipality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="Muncipality">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentDetails_ParentRelationship">
+          <End Role="ParentRelationship" Type="Self.ParentRelationship" Multiplicity="1" />
+          <End Role="ParentDetails" Type="Self.ParentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParentRelationship">
+              <PropertyRef Name="RelationshipId" />
+            </Principal>
+            <Dependent Role="ParentDetails">
+              <PropertyRef Name="Relationship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentDetails_StudentInfo">
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="0..1" />
+          <End Role="ParentDetails" Type="Self.ParentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ParentDetails">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_District">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="PDistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_District1">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="CDistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Muncipality">
+          <End Role="Muncipality" Type="Self.Muncipality" Multiplicity="0..1" />
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muncipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="PMunicipalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Muncipality1">
+          <End Role="Muncipality" Type="Self.Muncipality" Multiplicity="0..1" />
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muncipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="CMunicipalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Province">
+          <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="PProviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Province1">
+          <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="CProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SMSP1ModelStoreContainer">
+          <EntitySet Name="CourseDetails" EntityType="Self.CourseDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EducationInfo" EntityType="Self.EducationInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Muncipality" EntityType="Self.Muncipality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParentDetails" EntityType="Self.ParentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParentRelationship" EntityType="Self.ParentRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentInfo" EntityType="Self.StudentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentLevel" EntityType="Self.StudentLevel" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_District_Province" Association="Self.FK_District_Province">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationInfo_StudentInfo" Association="Self.FK_EducationInfo_StudentInfo">
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+            <End Role="EducationInfo" EntitySet="EducationInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationInfo_StudentLevel" Association="Self.FK_EducationInfo_StudentLevel">
+            <End Role="StudentLevel" EntitySet="StudentLevel" />
+            <End Role="EducationInfo" EntitySet="EducationInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muncipality_District" Association="Self.FK_Muncipality_District">
+            <End Role="District" EntitySet="District" />
+            <End Role="Muncipality" EntitySet="Muncipality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muncipality_Province" Association="Self.FK_Muncipality_Province">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="Muncipality" EntitySet="Muncipality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentDetails_ParentRelationship" Association="Self.FK_ParentDetails_ParentRelationship">
+            <End Role="ParentRelationship" EntitySet="ParentRelationship" />
+            <End Role="ParentDetails" EntitySet="ParentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentDetails_StudentInfo" Association="Self.FK_ParentDetails_StudentInfo">
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+            <End Role="ParentDetails" EntitySet="ParentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_District" Association="Self.FK_StudentInfo_District">
+            <End Role="District" EntitySet="District" />
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_District1" Association="Self.FK_StudentInfo_District1">
+            <End Role="District" EntitySet="District" />
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Muncipality" Association="Self.FK_StudentInfo_Muncipality">
+            <End Role="Muncipality" EntitySet="Muncipality" />
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Muncipality1" Association="Self.FK_StudentInfo_Muncipality1">
+            <End Role="Muncipality" EntitySet="Muncipality" />
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Province" Association="Self.FK_StudentInfo_Province">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Province1" Association="Self.FK_StudentInfo_Province1">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SMSP1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SMSP1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CourseDetails" EntityType="SMSP1Model.CourseDetail" />
+          <EntitySet Name="Districts" EntityType="SMSP1Model.District" />
+          <EntitySet Name="EducationInfoes" EntityType="SMSP1Model.EducationInfo" />
+          <EntitySet Name="Muncipalities" EntityType="SMSP1Model.Muncipality" />
+          <EntitySet Name="ParentDetails" EntityType="SMSP1Model.ParentDetail" />
+          <EntitySet Name="ParentRelationships" EntityType="SMSP1Model.ParentRelationship" />
+          <EntitySet Name="Provinces" EntityType="SMSP1Model.Province" />
+          <EntitySet Name="StudentInfoes" EntityType="SMSP1Model.StudentInfo" />
+          <EntitySet Name="StudentLevels" EntityType="SMSP1Model.StudentLevel" />
+          <AssociationSet Name="FK_District_Province" Association="SMSP1Model.FK_District_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muncipality_District" Association="SMSP1Model.FK_Muncipality_District">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Muncipality" EntitySet="Muncipalities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationInfo_StudentInfo" Association="SMSP1Model.FK_EducationInfo_StudentInfo">
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+            <End Role="EducationInfo" EntitySet="EducationInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EducationInfo_StudentLevel" Association="SMSP1Model.FK_EducationInfo_StudentLevel">
+            <End Role="StudentLevel" EntitySet="StudentLevels" />
+            <End Role="EducationInfo" EntitySet="EducationInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Muncipality_Province" Association="SMSP1Model.FK_Muncipality_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="Muncipality" EntitySet="Muncipalities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentDetails_ParentRelationship" Association="SMSP1Model.FK_ParentDetails_ParentRelationship">
+            <End Role="ParentRelationship" EntitySet="ParentRelationships" />
+            <End Role="ParentDetail" EntitySet="ParentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParentDetails_StudentInfo" Association="SMSP1Model.FK_ParentDetails_StudentInfo">
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+            <End Role="ParentDetail" EntitySet="ParentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Province" Association="SMSP1Model.FK_StudentInfo_Province">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Province1" Association="SMSP1Model.FK_StudentInfo_Province1">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_District" Association="SMSP1Model.FK_StudentInfo_District">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_District1" Association="SMSP1Model.FK_StudentInfo_District1">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Muncipality" Association="SMSP1Model.FK_StudentInfo_Muncipality">
+            <End Role="Muncipality" EntitySet="Muncipalities" />
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_Muncipality1" Association="SMSP1Model.FK_StudentInfo_Muncipality1">
+            <End Role="Muncipality" EntitySet="Muncipalities" />
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CourseDetail">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreditHours" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Province" Relationship="SMSP1Model.FK_District_Province" FromRole="District" ToRole="Province" />
+          <NavigationProperty Name="Muncipalities" Relationship="SMSP1Model.FK_Muncipality_District" FromRole="District" ToRole="Muncipality" />
+          <NavigationProperty Name="StudentInfoes" Relationship="SMSP1Model.FK_StudentInfo_District" FromRole="District" ToRole="StudentInfo" />
+          <NavigationProperty Name="StudentInfoes1" Relationship="SMSP1Model.FK_StudentInfo_District1" FromRole="District" ToRole="StudentInfo" />
+        </EntityType>
+        <EntityType Name="EducationInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelId" Type="Int32" />
+          <Property Name="CollegeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BoardName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MajorSubject" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PassedYear" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudentId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="StudentInfo" Relationship="SMSP1Model.FK_EducationInfo_StudentInfo" FromRole="EducationInfo" ToRole="StudentInfo" />
+          <NavigationProperty Name="StudentLevel" Relationship="SMSP1Model.FK_EducationInfo_StudentLevel" FromRole="EducationInfo" ToRole="StudentLevel" />
+        </EntityType>
+        <EntityType Name="Muncipality">
+          <Key>
+            <PropertyRef Name="MunicipalityId" />
+          </Key>
+          <Property Name="MunicipalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MunicipalityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="District" Relationship="SMSP1Model.FK_Muncipality_District" FromRole="Muncipality" ToRole="District" />
+          <NavigationProperty Name="Province" Relationship="SMSP1Model.FK_Muncipality_Province" FromRole="Muncipality" ToRole="Province" />
+          <NavigationProperty Name="StudentInfoes" Relationship="SMSP1Model.FK_StudentInfo_Muncipality" FromRole="Muncipality" ToRole="StudentInfo" />
+          <NavigationProperty Name="StudentInfoes1" Relationship="SMSP1Model.FK_StudentInfo_Muncipality1" FromRole="Muncipality" ToRole="StudentInfo" />
+        </EntityType>
+        <EntityType Name="ParentDetail">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ParentPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relationship" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" />
+          <NavigationProperty Name="ParentRelationship" Relationship="SMSP1Model.FK_ParentDetails_ParentRelationship" FromRole="ParentDetail" ToRole="ParentRelationship" />
+          <NavigationProperty Name="StudentInfo" Relationship="SMSP1Model.FK_ParentDetails_StudentInfo" FromRole="ParentDetail" ToRole="StudentInfo" />
+        </EntityType>
+        <EntityType Name="ParentRelationship">
+          <Key>
+            <PropertyRef Name="RelationshipId" />
+          </Key>
+          <Property Name="RelationshipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RelationshipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="ParentDetails" Relationship="SMSP1Model.FK_ParentDetails_ParentRelationship" FromRole="ParentRelationship" ToRole="ParentDetail" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="ProvinceId" />
+          </Key>
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProvinceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Districts" Relationship="SMSP1Model.FK_District_Province" FromRole="Province" ToRole="District" />
+          <NavigationProperty Name="Muncipalities" Relationship="SMSP1Model.FK_Muncipality_Province" FromRole="Province" ToRole="Muncipality" />
+          <NavigationProperty Name="StudentInfoes" Relationship="SMSP1Model.FK_StudentInfo_Province" FromRole="Province" ToRole="StudentInfo" />
+          <NavigationProperty Name="StudentInfoes1" Relationship="SMSP1Model.FK_StudentInfo_Province1" FromRole="Province" ToRole="StudentInfo" />
+        </EntityType>
+        <EntityType Name="StudentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PProviceId" Type="Int32" />
+          <Property Name="PDistrictId" Type="Int32" />
+          <Property Name="PMunicipalityId" Type="Int32" />
+          <Property Name="PWardNo" Type="Int32" />
+          <Property Name="CProvinceId" Type="Int32" />
+          <Property Name="CDistrictId" Type="Int32" />
+          <Property Name="CMunicipalityID" Type="Int32" />
+          <Property Name="CWard" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="EducationInfoes" Relationship="SMSP1Model.FK_EducationInfo_StudentInfo" FromRole="StudentInfo" ToRole="EducationInfo" />
+          <NavigationProperty Name="ParentDetails" Relationship="SMSP1Model.FK_ParentDetails_StudentInfo" FromRole="StudentInfo" ToRole="ParentDetail" />
+          <NavigationProperty Name="Province" Relationship="SMSP1Model.FK_StudentInfo_Province" FromRole="StudentInfo" ToRole="Province" />
+          <NavigationProperty Name="Province1" Relationship="SMSP1Model.FK_StudentInfo_Province1" FromRole="StudentInfo" ToRole="Province" />
+          <NavigationProperty Name="District" Relationship="SMSP1Model.FK_StudentInfo_District" FromRole="StudentInfo" ToRole="District" />
+          <NavigationProperty Name="District1" Relationship="SMSP1Model.FK_StudentInfo_District1" FromRole="StudentInfo" ToRole="District" />
+          <NavigationProperty Name="Muncipality" Relationship="SMSP1Model.FK_StudentInfo_Muncipality" FromRole="StudentInfo" ToRole="Muncipality" />
+          <NavigationProperty Name="Muncipality1" Relationship="SMSP1Model.FK_StudentInfo_Muncipality1" FromRole="StudentInfo" ToRole="Muncipality" />
+        </EntityType>
+        <EntityType Name="StudentLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EducationInfoes" Relationship="SMSP1Model.FK_EducationInfo_StudentLevel" FromRole="StudentLevel" ToRole="EducationInfo" />
+        </EntityType>
+        <Association Name="FK_District_Province">
+          <End Type="SMSP1Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="SMSP1Model.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muncipality_District">
+          <End Type="SMSP1Model.District" Role="District" Multiplicity="1" />
+          <End Type="SMSP1Model.Muncipality" Role="Muncipality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Muncipality">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationInfo_StudentInfo">
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="0..1" />
+          <End Type="SMSP1Model.EducationInfo" Role="EducationInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EducationInfo">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EducationInfo_StudentLevel">
+          <End Type="SMSP1Model.StudentLevel" Role="StudentLevel" Multiplicity="0..1" />
+          <End Type="SMSP1Model.EducationInfo" Role="EducationInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EducationInfo">
+              <PropertyRef Name="LevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Muncipality_Province">
+          <End Type="SMSP1Model.Province" Role="Province" Multiplicity="1" />
+          <End Type="SMSP1Model.Muncipality" Role="Muncipality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="Muncipality">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentDetails_ParentRelationship">
+          <End Type="SMSP1Model.ParentRelationship" Role="ParentRelationship" Multiplicity="1" />
+          <End Type="SMSP1Model.ParentDetail" Role="ParentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParentRelationship">
+              <PropertyRef Name="RelationshipId" />
+            </Principal>
+            <Dependent Role="ParentDetail">
+              <PropertyRef Name="Relationship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParentDetails_StudentInfo">
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="0..1" />
+          <End Type="SMSP1Model.ParentDetail" Role="ParentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ParentDetail">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Province">
+          <End Type="SMSP1Model.Province" Role="Province" Multiplicity="0..1" />
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="PProviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Province1">
+          <End Type="SMSP1Model.Province" Role="Province" Multiplicity="0..1" />
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="ProvinceId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="CProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_District">
+          <End Type="SMSP1Model.District" Role="District" Multiplicity="0..1" />
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="PDistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_District1">
+          <End Type="SMSP1Model.District" Role="District" Multiplicity="0..1" />
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="CDistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Muncipality">
+          <End Type="SMSP1Model.Muncipality" Role="Muncipality" Multiplicity="0..1" />
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muncipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="PMunicipalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_Muncipality1">
+          <End Type="SMSP1Model.Muncipality" Role="Muncipality" Multiplicity="0..1" />
+          <End Type="SMSP1Model.StudentInfo" Role="StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Muncipality">
+              <PropertyRef Name="MunicipalityId" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="CMunicipalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SMSP1ModelStoreContainer" CdmEntityContainer="SMSP1Entities">
+          <EntitySetMapping Name="CourseDetails">
+            <EntityTypeMapping TypeName="SMSP1Model.CourseDetail">
+              <MappingFragment StoreEntitySet="CourseDetails">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreditHours" ColumnName="CreditHours" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="SMSP1Model.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationInfoes">
+            <EntityTypeMapping TypeName="SMSP1Model.EducationInfo">
+              <MappingFragment StoreEntitySet="EducationInfo">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="PassedYear" ColumnName="PassedYear" />
+                <ScalarProperty Name="MajorSubject" ColumnName="MajorSubject" />
+                <ScalarProperty Name="BoardName" ColumnName="BoardName" />
+                <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
+                <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Muncipalities">
+            <EntityTypeMapping TypeName="SMSP1Model.Muncipality">
+              <MappingFragment StoreEntitySet="Muncipality">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="MunicipalityName" ColumnName="MunicipalityName" />
+                <ScalarProperty Name="MunicipalityId" ColumnName="MunicipalityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParentDetails">
+            <EntityTypeMapping TypeName="SMSP1Model.ParentDetail">
+              <MappingFragment StoreEntitySet="ParentDetails">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="ParentPhone" ColumnName="ParentPhone" />
+                <ScalarProperty Name="ParentName" ColumnName="ParentName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParentRelationships">
+            <EntityTypeMapping TypeName="SMSP1Model.ParentRelationship">
+              <MappingFragment StoreEntitySet="ParentRelationship">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RelationshipName" ColumnName="RelationshipName" />
+                <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="SMSP1Model.Province">
+              <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentInfoes">
+            <EntityTypeMapping TypeName="SMSP1Model.StudentInfo">
+              <MappingFragment StoreEntitySet="StudentInfo">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CWard" ColumnName="CWard" />
+                <ScalarProperty Name="CMunicipalityID" ColumnName="CMunicipalityID" />
+                <ScalarProperty Name="CDistrictId" ColumnName="CDistrictId" />
+                <ScalarProperty Name="CProvinceId" ColumnName="CProvinceId" />
+                <ScalarProperty Name="PWardNo" ColumnName="PWardNo" />
+                <ScalarProperty Name="PMunicipalityId" ColumnName="PMunicipalityId" />
+                <ScalarProperty Name="PDistrictId" ColumnName="PDistrictId" />
+                <ScalarProperty Name="PProviceId" ColumnName="PProviceId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentLevels">
+            <EntityTypeMapping TypeName="SMSP1Model.StudentLevel">
+              <MappingFragment StoreEntitySet="StudentLevel">
+                <ScalarProperty Name="LevelDescription" ColumnName="LevelDescription" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
